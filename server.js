@@ -1,3 +1,5 @@
+
+require("dotenv").config();
 const express = require("express");
 const cors = require("cors");
 const bodyParser = require("body-parser");
@@ -13,7 +15,6 @@ const otpRoutes = require("./routes/otpRoutes");
 const userRoutes = require("./routes/userRoutes")
 const app = express();
 
-require("dotenv").config();
 connectDB();
 
 app.use(express.urlencoded({ extended: true }));
@@ -30,6 +31,8 @@ app.use("/media/membership",mediaMembershipRoutes)
 app.use("/owner",ownerLoginRoutes)
 app.use("/auth/otp", otpRoutes);
 app.use("/auth",userRoutes)
-app.listen(7070, () => {
-  console.log("Server running on port 7070");
+app.listen(process.env.PORT, () => {
+  console.log(`Server running on port ${process.env.PORT}`);
 });
+
+console.log("MONGODB_URI:", process.env.MONGODB_URI);

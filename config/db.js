@@ -1,14 +1,17 @@
 const mongoose = require("mongoose");
+console.log("Inside db.js:", process.env.MONGODB_URI);
+const connectDB = async () => {
+  try {
+    console.log("Inside db.js:", process.env.MONGODB_URI);
 
-const connectDB= async()=>{
-    try{
-        await mongoose.connect(process.env.MONGO_URI);
-        console.log("MongoDB is connected")
-    }
-    catch(error){
-        console.log(error);
-        process.exit(1)
-    }
-}
+    await mongoose.connect(process.env.MONGODB_URI,{
+      family: 4
+    });
+
+    console.log("MongoDB Connected");
+  } catch (err) {
+    console.error(err);
+  }
+};
 
 module.exports = connectDB;
