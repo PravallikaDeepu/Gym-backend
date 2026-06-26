@@ -1,10 +1,10 @@
-const Registration = require("../models/User");
+const Registration = require("../models/Registration");
 const bcrypt = require("bcrypt");
 
 exports.loginOwner = async (req, res) => {
   try {
     const { email, password } = req.body;
-    console.log(re.body,"REquesting body")
+    console.log(req.body,"REquesting body")
 
     const user = await Registration.findOne({
       enteredEmail: email,
