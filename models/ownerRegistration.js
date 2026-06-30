@@ -1,10 +1,16 @@
 const mongoose = require("mongoose");
 
-const basicGymSchema = new mongoose.Schema({
-   gymName:String,
-    establishmentYear:String,
-    gymType:String,
-    gymDescription:String
+const gymDetailsSchema = new mongoose.Schema({
+  ownerId: {
+    type: mongoose.Schema.Types.ObjectId,
+    ref: "Registration",
+    required: true,
+  },
+
+  gymName: String,
+  establishmentYear: String,
+  gymType: String,
+  gymDescription: String,
 });
 
-module.exports = mongoose.model("gymDetails", basicGymSchema);
+module.exports = mongoose.model("GymDetails", gymDetailsSchema);

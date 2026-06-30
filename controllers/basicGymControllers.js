@@ -3,22 +3,24 @@ const Registration = require("../models/ownerRegistration");
 exports.basicDetails = async (req, res) => {
   try {
     const {
+      ownerId,
       gymName,
       establishmentYear,
       gymType,
       gymDescription,
-    } = req.body.message;
+    } = req.body; // 
 
-    const user = new Registration({
+    const gym = new Registration({
+      ownerId, // 🔥 IMPORTANT RELATIONSHIP
       gymName,
       establishmentYear,
       gymType,
       gymDescription,
     });
 
-    await user.save();
+    await gym.save();
 
-    res.status(201).json({
+    return res.status(201).json({
       success: true,
       message: "Gym details saved successfully",
     });
@@ -26,9 +28,9 @@ exports.basicDetails = async (req, res) => {
   } catch (err) {
     console.log(err);
 
-    res.status(500).json({
+    return res.status(500).json({
       success: false,
-      message: "Server Error",
+      message: "Server error",
     });
   }
 };

@@ -2,6 +2,8 @@ const MediaMembershipDetail = require("../models/mediaMembershipDetails");
 
 exports.gymMembershipDetails = async (req, res) => {
   try {
+    const ownerId = req.body.ownerId;
+
     const membershipPlans = JSON.parse(req.body.membershipPlans);
 
     const gymLogo = req.files?.gymLogo?.[0]?.filename || null;
@@ -11,6 +13,7 @@ exports.gymMembershipDetails = async (req, res) => {
       req.files?.gymPhotos?.map((file) => file.filename) || [];
 
     const mediaData = await MediaMembershipDetail.create({
+      ownerId,
       membershipPlans,
       gymLogo,
       coverImage,

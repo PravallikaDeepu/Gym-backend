@@ -9,6 +9,11 @@ const membershipPlanSchema = new mongoose.Schema({
 });
 
 const mediaMembershipSchema = new mongoose.Schema({
+  ownerId: {
+    type: mongoose.Schema.Types.ObjectId,
+    ref: "Registration",
+    required: true,
+  },
   membershipPlans: [membershipPlanSchema],
   gymLogo: String,
   coverImage: String,

@@ -3,15 +3,17 @@ const OperatingDetail = require("../models/operatingDetails");
 exports.gymOperatingDetails = async (req, res) => {
   try {
     const {
+      ownerId,
      openingTime,
   closingTime,
   gymFacilities,
   gymEquipments,
   otherFacilities,
   otherEquipments
-    } = req.body.message;
+    } = req.body;
 
     const user = new OperatingDetail({
+      ownerId,
        openingTime,
   closingTime,
   gymFacilities,

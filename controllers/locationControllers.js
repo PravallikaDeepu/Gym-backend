@@ -3,23 +3,27 @@ const LocationDetail = require("../models/locationDetails");
 exports.gymLocationDetails = async (req, res) => {
   try {
     const {
+      ownerId,
      addressLine1,
     addressLine2,
     landmark,
     city,
     state,
     pincode,
-    country
-    } = req.body.message;
+    country,
+    googleMapsLink
+    } = req.body;
 
     const user = new LocationDetail({
+      ownerId,
    addressLine1,
     addressLine2,
     landmark,
     city,
     state,
     pincode,
-    country
+    country,
+    googleMapsLink
     });
 
     await user.save();

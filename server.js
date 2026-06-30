@@ -14,13 +14,15 @@ const ownerLoginRoutes = require("./routes/ownerLoginRoutes")
 const otpRoutes = require("./routes/otpRoutes");
 const userRoutes = require("./routes/userRoutes")
 const app = express();
+const searchGymRoutes = require("./routes/searchGymRoutes");
+
 
 connectDB();
-
+app.use("/gyms", searchGymRoutes);
 app.use(express.urlencoded({ extended: true }));
 app.use(bodyParser.json());
 app.use(cors());
-
+app.use(express.json())
 app.set("view engine", "ejs");
 
 app.use("/auth", registrationRoutes);
@@ -30,7 +32,7 @@ app.use("/location", locationRoutes)
 app.use("/media/membership",mediaMembershipRoutes)
 app.use("/owner",ownerLoginRoutes)
 app.use("/auth/otp", otpRoutes);
-app.use("/auth",userRoutes)
+app.use("/auth",userRoutes);
 app.listen(process.env.PORT, () => {
   console.log(`Server running on port ${process.env.PORT}`);
 });

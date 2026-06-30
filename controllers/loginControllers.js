@@ -1,10 +1,10 @@
 const Registration = require("../models/Registration");
 const bcrypt = require("bcrypt");
+const jwt = require("jsonwebtoken");
 
 exports.loginOwner = async (req, res) => {
   try {
     const { email, password } = req.body;
-    console.log(req.body,"REquesting body")
 
     const user = await Registration.findOne({
       enteredEmail: email,
@@ -29,9 +29,21 @@ exports.loginOwner = async (req, res) => {
       });
     }
 
+    const token = jwt.sign(
+      {
+        id: user._id,
+        email: user.enteredEmail,
+      },
+      process.env.JWT_SECRET,
+      {
+        expiresIn: "7d",
+      }
+    );
+
     return res.status(200).json({
       success: true,
       message: "Login Successful",
+      token,
       user,
     });
 
